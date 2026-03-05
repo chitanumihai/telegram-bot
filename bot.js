@@ -21,15 +21,17 @@ const welcomeMessage =
 
 const helpMessage = `Informații disponibile:`;
 
-bot.help((ctx) => {
-  ctx.reply(helpMessage, buttons);
+bot.help(async (ctx) => {
+  const msg = await ctx.reply(helpMessage, { ...buttons, disable_notification: true });
+  setTimeout(() => ctx.deleteMessage(msg.message_id).catch(() => {}), 20000);
 });
 
-bot.on("new_chat_members", (ctx) => {
+bot.on("new_chat_members", async (ctx) => {
   const newMembers = ctx.message.new_chat_members.filter((m) => !m.is_bot);
   if (newMembers.length > 0) {
     const names = newMembers.map((m) => m.first_name).join(", ");
-    ctx.reply(`Bine ai venit ${names}!\n${welcomeMessage}`, buttons);
+    const msg = await ctx.reply(`Bine ai venit ${names}!\n${welcomeMessage}`, { ...buttons, disable_notification: true });
+    setTimeout(() => ctx.deleteMessage(msg.message_id).catch(() => {}), 20000);
   }
 });
 
