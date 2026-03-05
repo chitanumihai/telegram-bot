@@ -17,14 +17,12 @@ const buttons = Markup.inlineKeyboard([
 ]);
 
 const welcomeMessage =
-  "Salut! Eu sunt un bot care oferă informații utile pentru locatarii acestui bloc.\nApasă pe butoanele de mai jos pentru a obține detaliile necesare.";
+  "Salut! Eu sunt un bot care oferă informații utile pentru locatarii acestui bloc.\nScrie /help pentru a vedea ce informații sunt disponibile.";
 
-bot.start((ctx) => {
-  ctx.reply(`${welcomeMessage}\n\nScrie /help pentru a vedea opțiunile disponibile.`);
-});
+const helpMessage = `Informații disponibile:`;
 
 bot.help((ctx) => {
-  ctx.reply(welcomeMessage, buttons);
+  ctx.reply(helpMessage, buttons);
 });
 
 bot.on("new_chat_members", (ctx) => {
