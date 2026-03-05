@@ -17,7 +17,7 @@ const buttons = Markup.inlineKeyboard([
 ]);
 
 const welcomeMessage =
-  "Salut! Eu sunt un bot care oferă informații utile pentru locatarii acestui bloc.\nScrie /help pentru a vedea ce informații sunt disponibile.";
+  "Eu sunt un bot care oferă informații utile pentru locatarii acestui bloc.\nScrie /help pentru a vedea ce informații sunt disponibile.";
 
 const helpMessage = `Informații disponibile:`;
 
@@ -29,7 +29,7 @@ bot.on("new_chat_members", (ctx) => {
   const newMembers = ctx.message.new_chat_members.filter((m) => !m.is_bot);
   if (newMembers.length > 0) {
     const names = newMembers.map((m) => m.first_name).join(", ");
-    ctx.reply(`Bine ai venit ${names}!\n\n${welcomeMessage}`, buttons);
+    ctx.reply(`Bine ai venit ${names}!\n${welcomeMessage}`, buttons);
   }
 });
 
