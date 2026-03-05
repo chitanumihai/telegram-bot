@@ -20,6 +20,10 @@ const welcomeMessage =
   "Salut! Eu sunt un bot care oferă informații utile pentru locatarii acestui bloc.\nApasă pe butoanele de mai jos pentru a obține detaliile necesare.";
 
 bot.start((ctx) => {
+  ctx.reply(`${welcomeMessage}\n\nScrie /help pentru a vedea opțiunile disponibile.`);
+});
+
+bot.help((ctx) => {
   ctx.reply(welcomeMessage, buttons);
 });
 
