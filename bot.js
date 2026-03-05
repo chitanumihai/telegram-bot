@@ -11,13 +11,13 @@ const SECURITY_PHONE = process.env.SECURITY_PHONE || "N/A";
 const TRASH_CODE = process.env.TRASH_CODE || "N/A";
 
 const buttons = Markup.inlineKeyboard([
-  [Markup.button.callback("Securitate", "security")],
-  [Markup.button.callback("Gunoi", "trash")],
-  [Markup.button.callback("Inchide", "close")],
+  [Markup.button.callback("Numar telefon pază", "security")],
+  [Markup.button.callback("Cod acces gunoi", "trash")],
+  [Markup.button.callback("Închide", "close")],
 ]);
 
 const welcomeMessage =
-  "Salut! Apasa un buton de mai jos pentru a obtine informatii utile. Doar tu vei vedea raspunsul.";
+  "Salut! Eu sunt un bot care oferă informații utile pentru locatarii acestui bloc.\nApasă pe butoanele de mai jos pentru a obține detaliile necesare.";
 
 bot.start((ctx) => {
   ctx.reply(welcomeMessage, buttons);
@@ -32,11 +32,11 @@ bot.on("new_chat_members", (ctx) => {
 });
 
 bot.action("security", (ctx) => {
-  ctx.answerCbQuery(`Paza\nTelefon: ${SECURITY_PHONE}`, { show_alert: true });
+  ctx.answerCbQuery(`Numar telefon pază:\n${SECURITY_PHONE}`, { show_alert: true });
 });
 
 bot.action("trash", (ctx) => {
-  ctx.answerCbQuery(`Gunoi\nCod: ${TRASH_CODE}`, { show_alert: true });
+  ctx.answerCbQuery(`Cod acces gunoi:\n${TRASH_CODE}`, { show_alert: true });
 });
 
 bot.action("close", (ctx) => {
