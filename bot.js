@@ -21,13 +21,11 @@ bot.start((ctx) => {
 });
 
 bot.action("security", (ctx) => {
-  ctx.answerCbQuery();
-  ctx.reply(`Security\nPhone: ${SECURITY_PHONE}`);
+  ctx.answerCbQuery(`Security\nPhone: ${SECURITY_PHONE}`, { show_alert: true });
 });
 
 bot.action("trash", (ctx) => {
-  ctx.answerCbQuery();
-  ctx.reply(`Trash\nCode: ${TRASH_CODE}`);
+  ctx.answerCbQuery(`Trash\nCode: ${TRASH_CODE}`, { show_alert: true });
 });
 
 module.exports = bot;
