@@ -10,22 +10,38 @@ const bot = new Telegraf(BOT_TOKEN);
 const SECURITY_PHONE = process.env.SECURITY_PHONE || "N/A";
 const TRASH_CODE = process.env.TRASH_CODE || "N/A";
 
+const buttons = Markup.inlineKeyboard([
+  [Markup.button.callback("Securitate", "security")],
+  [Markup.button.callback("Gunoi", "trash")],
+  [Markup.button.callback("Inchide", "close")],
+]);
+
+const welcomeMessage =
+  "Salut! Apasa un buton de mai jos pentru a obtine informatii utile. Doar tu vei vedea raspunsul.";
+
 bot.start((ctx) => {
-  ctx.reply(
-    "Hey! Tap a button below to get the contact info you need. Only you will see the response.",
-    Markup.inlineKeyboard([
-      [Markup.button.callback("Security", "security")],
-      [Markup.button.callback("Trash", "trash")],
-    ])
-  );
+  ctx.reply(welcomeMessage, buttons);
+});
+
+bot.on("new_chat_members", (ctx) => {
+  const newMembers = ctx.message.new_chat_members.filter((m) => !m.is_bot);
+  if (newMembers.length > 0) {
+    const names = newMembers.map((m) => m.first_name).join(", ");
+    ctx.reply(`Bine ai venit ${names}!\n\n${welcomeMessage}`, buttons);
+  }
 });
 
 bot.action("security", (ctx) => {
-  ctx.answerCbQuery(`Security\nPhone: ${SECURITY_PHONE}`, { show_alert: true });
+  ctx.answerCbQuery(`Paza\nTelefon: ${SECURITY_PHONE}`, { show_alert: true });
 });
 
 bot.action("trash", (ctx) => {
-  ctx.answerCbQuery(`Trash\nCode: ${TRASH_CODE}`, { show_alert: true });
+  ctx.answerCbQuery(`Gunoi\nCod: ${TRASH_CODE}`, { show_alert: true });
+});
+
+bot.action("close", (ctx) => {
+  ctx.answerCbQuery();
+  ctx.deleteMessage();
 });
 
 module.exports = bot;
