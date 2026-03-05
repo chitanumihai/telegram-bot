@@ -12,7 +12,7 @@ const TRASH_CODE = process.env.TRASH_CODE || "N/A";
 
 bot.start((ctx) => {
   ctx.reply(
-    "Choose an option:",
+    "Hey! Tap a button below to get the contact info you need. Only you will see the response.",
     Markup.inlineKeyboard([
       [Markup.button.callback("Security", "security")],
       [Markup.button.callback("Trash", "trash")],
